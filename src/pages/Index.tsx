@@ -1,13 +1,27 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { Hero } from "@/components/Hero";
+import { TrustSection } from "@/components/TrustSection";
+import { ServicesSection } from "@/components/ServicesSection";
+import { ContactSection } from "@/components/ContactSection";
+import { BookingDialog } from "@/components/BookingDialog";
+import { MobileFooter } from "@/components/MobileFooter";
 
 const Index = () => {
+  const [bookingOpen, setBookingOpen] = useState(false);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <main className="min-h-screen bg-background">
+      <Hero onBookingClick={() => setBookingOpen(true)} />
+      <TrustSection />
+      <ServicesSection />
+      <ContactSection onBookingClick={() => setBookingOpen(true)} />
+      
+      <BookingDialog open={bookingOpen} onOpenChange={setBookingOpen} />
+      <MobileFooter onBookingClick={() => setBookingOpen(true)} />
+
+      {/* Mobile spacing for fixed footer */}
+      <div className="h-20 md:hidden" />
+    </main>
   );
 };
 
